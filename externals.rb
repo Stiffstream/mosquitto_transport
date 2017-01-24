@@ -5,7 +5,7 @@ MxxRu::arch_externals :libmosquitto do |e|
   e.map_file 'config.h' => 'dev/libmosquitto/*'
 end
 
-MxxRu::hg_externals :libmosquitto_mxxru do |e|
+MxxRu::arch_externals :libmosquitto_mxxru do |e|
   e.url 'https://bitbucket.org/sobjectizerteam/libmosquitto_mxxru_1.1/get/v.1.1.0.tar.bz2'
 
   e.map_file 'dev/libmosquitto/prj.rb' => 'dev/libmosquitto/*'
