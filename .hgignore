@@ -1,0 +1,19 @@
+syntax: glob
+
+.externals
+*.swp
+dev/libmosquitto
+dev/target
+dev/so_5
+dev/timertt
+dev/fmt
+dev/fmt_mxxru
+dev/spdlog
+dev/spdlog_mxxru
+dev/catch
+dev/__*.vim
+dev/.exrc
+dev/zbuild
+*.sublime-project
+*.sublime-workspace
+
