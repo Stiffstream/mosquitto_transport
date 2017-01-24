@@ -6,7 +6,7 @@ _mosquitto_transport_ is an experiment of writing SObjectizer-based wrapper arou
 
 To use _mosquitto_transport_ it is necessary to have:
 
-* C++14 compiler (gcc 5.1 or above, clang 3.6 or above);
+* C++14 compiler (gcc 5.4 or above, clang 3.8 or above);
 * [Mxx_ru](https://sourceforge.net/projects/mxxru/) 1.6.13 or above;
 * Boost-1.58 or above.
 
