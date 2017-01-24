@@ -455,8 +455,8 @@ topic_subscriber_t< DECODER_TAG >::subscribe(
 
 		auto actual_mbox = instance.environment().create_mbox();
 
-		postman_shared_ptr_t postman{
-				new actual_postman_t< DECODER_TAG >{ actual_mbox, on_failure } };
+		postman_shared_ptr_t postman =
+				std::make_shared< actual_postman_t< DECODER_TAG > >( actual_mbox, on_failure );
 
 		auto tm = new topic_mbox_t{
 				topic_name,
