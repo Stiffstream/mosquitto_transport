@@ -12,9 +12,8 @@ MxxRu::arch_externals :libmosquitto_mxxru do |e|
 end
 
 MxxRu::arch_externals :fmt do |e|
-  e.url 'https://github.com/fmtlib/fmt/archive/3.0.0.zip'
+  e.url 'https://github.com/fmtlib/fmt/archive/4.1.0.zip'
 
-  e.map_dir 'cppformat' => 'dev/fmt'
   e.map_dir 'fmt' => 'dev/fmt'
 end
 
@@ -25,7 +24,7 @@ MxxRu::arch_externals :fmtlib_mxxru do |e|
 end
 
 MxxRu::arch_externals :spdlog do |e|
-  e.url 'https://github.com/gabime/spdlog/archive/v0.9.0.zip'
+  e.url 'https://github.com/gabime/spdlog/archive/v0.16.3.zip'
 
   e.map_dir 'include' => 'dev/spdlog'
 end
@@ -37,14 +36,14 @@ MxxRu::arch_externals :spdlog_mxxru do |e|
 end
 
 MxxRu::arch_externals :so5 do |e|
-  e.url 'https://sourceforge.net/projects/sobjectizer/files/sobjectizer/SObjectizer%20Core%20v.5.5/so-5.5.18.tar.xz'
+  e.url 'https://sourceforge.net/projects/sobjectizer/files/sobjectizer/SObjectizer%20Core%20v.5.5/so-5.5.22.tar.xz'
 
   e.map_dir 'dev/so_5' => 'dev'
   e.map_dir 'dev/timertt' => 'dev'
 end
 
 MxxRu::arch_externals :catch do |e|
-  e.url 'https://github.com/philsquared/Catch/archive/v1.5.6.tar.gz'
+  e.url 'https://github.com/catchorg/Catch2/archive/v2.2.2.tar.gz'
 
   e.map_file 'single_include/catch.hpp' => 'dev/catch/*'
 end
