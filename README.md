@@ -1,6 +1,6 @@
 # What Is It?
 
-_mosquitto_transport_ is an experiment of writing SObjectizer-based wrapper around [mosquitto](https://mosquitto.org/) library.
+_mosquitto_transport_ is an experiment of writing [SObjectizer](https://stiffstream.com/en/products/sobjectizer.html)-based wrapper around [mosquitto](https://mosquitto.org/) library. It IS developed and maintained by [StiffStream](https://stiffstream.com).
 
 # Obtaining And Building
 
