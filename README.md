@@ -14,9 +14,9 @@ To use _mosquitto_transport_ it is necessary to have:
 
 There is an example of recipes for MxxRu::externals:
 
-~~~{.rb}
+```rb
 MxxRu::arch_externals :mosquitto_transport do |e|
-  e.url 'https://bitbucket.org/sobjectizerteam/mosquitto_transport-0.6/get/v.0.6.1.tar.bz2'
+  e.url 'https://github.com/Stiffstream/mosquitto_transport/archive/v.0.6.2.tar.gz'
 
   e.map_dir 'dev/mosquitto_transport' => 'dev'
 end
@@ -29,7 +29,7 @@ MxxRu::arch_externals :libmosquitto do |e|
 end
 
 MxxRu::arch_externals :libmosquitto_mxxru do |e|
-  e.url 'https://bitbucket.org/sobjectizerteam/libmosquitto_mxxru_1.1/get/v.1.1.0.tar.bz2'
+  e.url 'https://github.com/Stiffstream/libmosquitto_mxxru/archive/v.1.1.0.tar.gz'
 
   e.map_file 'dev/libmosquitto/prj.rb' => 'dev/libmosquitto/*'
 end
@@ -41,7 +41,7 @@ MxxRu::arch_externals :fmt do |e|
 end
 
 MxxRu::arch_externals :fmtlib_mxxru do |e|
-  e.url 'https://bitbucket.org/sobjectizerteam/fmtlib_mxxru-0.1/get/v.0.1.0.tar.bz2'
+  e.url 'https://github.com/Stiffstream/fmtlib_mxxru/archive/fmt-4.1.0.tar.gz'
 
   e.map_dir 'dev/fmt_mxxru' => 'dev'
 end
@@ -53,13 +53,13 @@ MxxRu::arch_externals :spdlog do |e|
 end
 
 MxxRu::arch_externals :spdlog_mxxru do |e|
-  e.url 'https://bitbucket.org/sobjectizerteam/spdlog_mxxru-1.2/get/v.1.2.0.tar.bz2'
+  e.url 'https://github.com/Stiffstream/spdlog_mxxru/archive/v.1.2.1.tar.gz'
 
   e.map_dir 'dev/spdlog_mxxru' => 'dev'
 end
 
 MxxRu::arch_externals :so5 do |e|
-  e.url 'https://sourceforge.net/projects/sobjectizer/files/sobjectizer/SObjectizer%20Core%20v.5.5/so-5.5.22.tar.xz'
+  e.url 'https://sourceforge.net/projects/sobjectizer/files/sobjectizer/SObjectizer%20Core%20v.5.5/so-5.5.24.4.tar.xz'
 
   e.map_dir 'dev/so_5' => 'dev'
   e.map_dir 'dev/timertt' => 'dev'
@@ -70,7 +70,7 @@ MxxRu::arch_externals :catch do |e|
 
   e.map_file 'single_include/catch.hpp' => 'dev/catch/*'
 end
-~~~
+```
 
 # License
 
@@ -84,7 +84,7 @@ To initialize and deinitialize mosquitto library correctly an instance of `lib_i
 
 For example:
 
-~~~~~{.cpp}
+```cpp
 namespace mosqt = mosquitto_transport;
 int main()
 {
@@ -93,7 +93,7 @@ int main()
     ...
   } );
 }
-~~~~~
+```
 
 ## Creation Of Transport Manager
 
@@ -107,7 +107,7 @@ After creation of `a_transport_manager_t` a value of `instance_t` must be obtain
 
 A very simple example:
 
-~~~~~{.cpp}
+```cpp
 namespace mosqt = mosquitto_transport;
 mosqt::instance_t make_transport(so_5::environment_t & env, mosqt::lib_initializer_t & mosq_init)
 {
@@ -132,7 +132,7 @@ mosqt::instance_t make_transport(so_5::environment_t & env, mosqt::lib_initializ
   } );
   return instance;
 }
-~~~~~
+```
 
 ## Message Encoding and Decoding Principles
 
@@ -144,7 +144,7 @@ be a partial or full specialization of
 `mosquitto_transport::encoder_t<ENCODER_TAG,MSG>` template. For example it
 could looks like:
 
-~~~~~{.cpp}
+```cpp
 struct json_encoding {}; // Will be used as tag type.
 
 namespace mosquitto_transport {
@@ -162,13 +162,13 @@ struct encoder_t< json_encoding, MSG >
 };
 
 }
-~~~~~
+```
 
 Similary for decoding a message from some format there should be a partial of
 full specialization of `mosquitto_transport::decoder_t<DECODER_TAG,MSG>`
 template. Something like that:
 
-~~~~~{.cpp}
+```cpp
 struct json_encoding {}; // Will be used as tag type.
 
 namespace mosquitto_transport {
@@ -188,14 +188,14 @@ struct decoder_t< json_encoding, MSG >
 };
 
 }
-~~~~~
+```
 
 After that some useful typedefs could be defined:
 
-~~~~~{.cpp}
+```cpp
 using topic_subscriber = mosquitto_transport::topic_subscriber_t< json_encoding >;
 using topic_publisher = mosquitto_transport::topic_publisher_t< json_encoding >;
-~~~~~
+```
 
 ## Message Publishing 
 
@@ -204,7 +204,7 @@ There is just one way for publishing messages in v.0.3.
 It requires usage of `mosquitto_transport::publisher_t` template class and its
 method `publish`:
 
-~~~~~{.cpp}
+```cpp
 namespace mosqt = mosquitto_transport;
 
 mosqt::instance_t instance = ...; // Value returned by a_transport_manager_t agent.
@@ -216,12 +216,12 @@ mosqt::topic_publisher_t< json_encoding >::publish(
   instance, // Transport manager to be used.
   "clients/statuses/updates", // Topic for message.
   status_update_t{...} ); // Message to be published.
-~~~~~
+```cpp
 
 A call to `topic_publisher_t<TAG>::publish` can be shortened if there is an
 alias like that:
 
-~~~~~{.cpp}
+```cpp
 namespace mosqt = mosquitto_transport;
 ...
 using topic_publisher = mosqt::topic_publisher_t< json_encoding >;
@@ -230,7 +230,7 @@ topic_publisher::publish(
   instance, // Transport manager to be used.
   "clients/statuses/updates", // Topic for message.
   status_update_t{...} ); // Message to be published.
-~~~~~
+```
 
 **Attention.** *All messages are published with QoS=0.*
 
@@ -244,7 +244,7 @@ To create subscription it is necessary to use template class
 `mosquitto_transport::topic_subscriber_t<DECODER_TAG>` and its template method
 subscribe:
 
-~~~~~{.cpp}
+```cpp
 namespace mosqt = mosquitto_transport;
 ...
 class status_receiver_t : public so_5::agent_t
@@ -279,12 +279,12 @@ private :
     const status_update_t upd = cmd.decode< status_update_t >();
   }
 };
-~~~~~
+```cpp
 
 A call to `topic_subscriber_t<TAG>::subscribe` can be shortened if there is an
 alias like that:
 
-~~~~~{.cpp}
+```cpp
 namespace mosqt = mosquitto_transport;
 ...
 using topic_subscriber = mosqt::topic_subscriber_t< json_encoding >;
@@ -298,12 +298,12 @@ topic_subscriber::subscribe(
     st_finishing.event( mbox, &status_receiver_t::on_status_update );
     ...
   } );
-~~~~~
+```
 
 **Note.** There is also short name `msg_type` which can be used for
 simplification of incoming messages handling:
 
-~~~~~{.cpp}
+```cpp
 namespace mosqt = mosquitto_transport;
 ...
 using topic_subscriber = mosqt::topic_subscriber_t< json_encoding >;
@@ -312,14 +312,14 @@ void status_receiver_t::on_status_update(const topic_subscriber::msg_type & cmd)
 {
   const auto & upd = cmd.decode< status_update_t >();
 }
-~~~~~
+```
 
 ### Supscriptions With Wildcards In Topic Filters
 
 Since v.0.3 there is a possibility to subscribe to several topics by using
 wildcards `+` and `#` in topic filters. It could be done usual way:
 
-~~~~~{.cpp}
+```cpp
 namespace mosqt = mosquitto_transport;
 ...
 using topic_subscriber = mosqt::topic_subscriber_t< json_encoding >;
@@ -335,7 +335,7 @@ void status_listener_t::so_define_agent() override
 			...
 		} );
 }
-~~~~~
+```
 
 *Note.* When agent is subscribed to topic filter with wildcards it will
 receive actual topic name in `incoming_message_t`. For example if agent is
@@ -359,7 +359,7 @@ filter which was passed to `subscribe` method. For example, if topic filter
 `/sport/results/#` was used then this value will be returned by
 `topic_name()` methods.
 
-~~~~~{.cpp}
+```cpp
 namespace mosqt = mosquitto_transport;
 ...
 using topic_subscriber = mosqt::topic_subscriber_t< json_encoding >;
@@ -393,7 +393,7 @@ void status_listener_t::on_topic_lost(
 	// cmd.topic_name() will contain "client/+/status/updates" name.
 	...
 }
-~~~~~
+```
 
 **Note.** Because MQTT allows delivery of messages from subscribed topics
 before completion of subscription operation it is possible to receve some
@@ -418,7 +418,7 @@ Method `topic_subscriber_t::subscriber` can receive yet another parameter.
 If this parameter has value `mosquitto_transport::notify_on_failure` then
 a special message will be sent instead on throwing an exception:
 
-~~~~~{.cpp}
+```cpp
 namespace mosqt = mosquitto_transport;
 ...
 using topic_subscriber = mosqt::topic_subscriber_t< json_encoding >;
@@ -449,7 +449,7 @@ void status_listener_t::on_topic_failed(
 	// cmd.description() will contain description of the failure.
 	...
 }
-~~~~~
+```
 
 ### Subscription Timeout
 
@@ -460,7 +460,7 @@ be performed (see above).
 Subscription timeout is 60 seconds by default. It can be changed by `set_subscription_timeout` method
 of `transport_manager`. This method must be called before registration of `transport_manager` registration:
 
-~~~~~{.cpp}
+```cpp
 using namespace std::chrono_literals;
 
 namespace mosqt = mosquitto_transport;
@@ -478,7 +478,7 @@ mosqt::instance_t make_transport(so_5::environment_t & env, mosqt::lib_initializ
   } );
   return instance;
 }
-~~~~~
+```
 
 ## Broker Connection And Disconnection Notifications
 
@@ -486,7 +486,7 @@ There are `mosquitto_transport::broker_connected_t` and
 `mosquitto_transport::broker_disconnected_t` signals. They can be used to
 detection of connection status. Something like:
 
-~~~~~{.cpp}
+```cpp
 namespace mosqt = mosquitto_transport;
 ...
 class client_t : public so_5::agent_t
@@ -507,13 +507,13 @@ public :
   }
 ...
 };
-~~~~~
+```
 
 ## Setting The Will
 
 MQTT will can be set by `a_transport_manager_t::mqtt_will_set()` method. Please note that this method must be called before the registration of transport manager agent!
 
-~~~~~{.cpp}
+```cpp
 namespace mosqt = mosquitto_transport;
 mosqt::instance_t make_transport(so_5::environment_t & env, mosqt::lib_initializer_t & mosq_init)
 {
@@ -531,4 +531,4 @@ mosqt::instance_t make_transport(so_5::environment_t & env, mosqt::lib_initializ
   } );
   return instance;
 }
-~~~~~
+```
